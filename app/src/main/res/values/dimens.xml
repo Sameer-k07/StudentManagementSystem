@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="image_width_b">144dp</dimen>
+    <dimen name="image_height_b">144dp</dimen>
+    <dimen name="image_margin_top_b">40dp</dimen>
+    <dimen name="btn_text_size">20sp</dimen>
+    <dimen name="tv_text_size">40sp</dimen>
+    <dimen name="image_width_a">144dp</dimen>
+    <dimen name="image_height_a">144dp</dimen>
+    <dimen name="image_margin_top_a">80dp</dimen>
+    <dimen name="tv_text_size_name">25sp</dimen>
+    <dimen name="tv_text_size_roll">25sp</dimen>
+    <dimen name="padding_left">8dp</dimen>
+</resources>

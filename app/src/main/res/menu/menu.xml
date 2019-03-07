@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_switchId"
+        android:title="Layout"
+        app:showAsAction="always"
+        android:actionLayout="@layout/switch_layout"
+         />
+<item
+    android:id="@+id/menu_dropdown"
+    android:title="Sort"
+    app:showAsAction="always"
+    android:icon="@drawable/drop">
+
+    <menu>
+        <item
+            android:id="@+id/menu_sort_by_name"
+            android:icon="@android:drawable/ic_menu_sort_alphabetically"
+            android:title="Sort By Name"
+            app:showAsAction="never"/>
+
+        <item
+            android:id="@+id/menu_sort_by_roll"
+            android:icon="@android:drawable/ic_menu_sort_by_size"
+            android:title="Sort By Roll"
+            app:showAsAction="never"/>
+
+
+    </menu>
+</item>
+</menu>

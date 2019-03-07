@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.AddStudentActivity">
+
+
+    <ImageView
+        android:layout_width="@dimen/image_width_b"
+        android:layout_height="@dimen/image_height_b"
+        android:id="@+id/image_b"
+        android:layout_marginTop="@dimen/image_margin_top_b"
+        android:layout_centerHorizontal="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/b"/>
+
+    <EditText
+        android:id="@+id/et_studentName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image_b"
+        android:ems="10"
+        android:hint="@string/enter_name"
+        android:inputType="textPersonName"
+         />
+    <EditText
+        android:id="@+id/et_studentRoll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_studentName"
+        android:ems="10"
+        android:hint="@string/enter_roll_no"
+        android:inputType="number"
+        />
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:textSize="@dimen/btn_text_size"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimaryDark"
+        />
+
+
+</RelativeLayout>

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Student Management System</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="enter_roll_no">Enter Roll No</string>
+    <string name="save">Save</string>
+    <string name="no_student_added">No student added</string>
+    <string name="add_student">Add Student</string>
+
+    <string-array name="Dialog_Operations">
+        <item>View</item>
+        <item>Edit</item>
+        <item>Delete</item>
+    </string-array>
+
+</resources>
