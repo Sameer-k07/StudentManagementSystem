@@ -14,4 +14,7 @@ public final class Constant {
     public static final String ROLL ="roll";
     public static final String UPDATED_NAME ="updated_name";
     public static final String UPDATED_ROLL ="updated_roll";
+    public static final String NAME_MATCH ="^[a-zA-Z\\s]+$";
+    public static final String ROLL_MATCH ="[+-]?[0-9][0-9]*";
+
 }

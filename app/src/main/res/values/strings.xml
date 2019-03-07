@@ -5,6 +5,24 @@
     <string name="save">Save</string>
     <string name="no_student_added">No student added</string>
     <string name="add_student">Add Student</string>
+    <string name="choose">Choose your operation</string>
+    <string name="confirmation">Are you sure you want to delete</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
+    <string name="grid_layout">Grid Layout</string>
+    <string name="linear_layout">Linear Layout</string>
+    <string name="sortByName">Sort By Name</string>
+    <string name="sortByRoll">Sort By Roll No</string>
+    <string name="addStudent">Add Student</string>
+    <string name="rollNotUnique">Roll No not unique</string>
+    <string name="invalidRoll">Invalid Roll No</string>
+    <string name="invalidName">Invalid Name</string>
+    <string name="details">Student Details</string>
+    <string name="update">Update</string>
+    <string name="edit">Edit Student Details</string>
+    <string name="your_choice">You chose to</string>
+
 
     <string-array name="Dialog_Operations">
         <item>View</item>

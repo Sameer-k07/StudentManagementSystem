@@ -1,6 +1,7 @@
 package com.example.studentmanagementsystem.Validator;
 
 import com.example.studentmanagementsystem.Activity.MainActivity;
+import com.example.studentmanagementsystem.Constant.Constant;
 import com.example.studentmanagementsystem.Model.Student;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class Validate {
     *@return true or false depending upon validation
     */
     public static boolean isValidName(String name) {
-        String PATTERN = "^[a-zA-Z\\s]+$";
+        String PATTERN = Constant.NAME_MATCH;
         Pattern pattern = Pattern.compile(PATTERN);
         Matcher matcher = pattern.matcher(name);
         return matcher.matches();
@@ -26,7 +27,7 @@ public class Validate {
     *@return true or false depending upon validation
     */
     public static boolean isValidRollNo(String roll) {
-        String PATTERN = "[+-]?[0-9][0-9]*";
+        String PATTERN = Constant.ROLL_MATCH;
         Pattern pattern = Pattern.compile(PATTERN);
         Matcher matcher = pattern.matcher(roll);
         return matcher.matches();

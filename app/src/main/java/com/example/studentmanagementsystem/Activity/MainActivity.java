@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity  {
                 final Student student = studentList.get(position);
                 //alert dialog box to show list of operations
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
-                mBuilder.setTitle("Choose your operation ");
+                mBuilder.setTitle(R.string.choose);
                 mBuilder.setSingleChoiceItems(mDialogItems, -1, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity  {
                         case VIEW :
                              //to view details of student
                              intent.putExtra(Constant.MODE,Constant.VIEW);
-                             Toast.makeText(MainActivity.this,"You chose to "+mDialogItems[i],Toast.LENGTH_LONG).show();
+                             Toast.makeText(MainActivity.this,getString(R.string.your_choice)+mDialogItems[i],Toast.LENGTH_LONG).show();
                              intent.putExtra(Constant.VIEW_NAME,student.getmName());
                              intent.putExtra(Constant.VIEW_ROLL, student.getmRoll());
                              startActivity(intent);
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity  {
                             intent.putExtra(Constant.VIEW_NAME,student.getmName());
                             intent.putExtra(Constant.VIEW_ROLL, student.getmRoll());
                             intent.putExtra(Constant.POSITION,Integer.toString(position));
-                            Toast.makeText(MainActivity.this,"You chose to "+mDialogItems[i],Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this,getString(R.string.your_choice)+mDialogItems[i],Toast.LENGTH_LONG).show();
                             setposition(position);
                             startActivityForResult(intent, 2);
                             break;
@@ -105,8 +105,8 @@ public class MainActivity extends AppCompatActivity  {
                             //to delete details of student
                             //alert dialog box for confirmation before deleting details of particular student
                             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
-                            alertDialogBuilder.setMessage("Are you sure you want to delete");
-                                    alertDialogBuilder.setPositiveButton("Yes",
+                            alertDialogBuilder.setMessage(R.string.confirmation);
+                                    alertDialogBuilder.setPositiveButton(R.string.yes,
                                             new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface arg0, int arg1) {
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity  {
                                                     mAdapter.notifyDataSetChanged();
                                                 }
                                             });
-                                    alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    alertDialogBuilder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             dialog.cancel();
@@ -128,14 +128,14 @@ public class MainActivity extends AppCompatActivity  {
 
                             AlertDialog alertDialog = alertDialogBuilder.create();
                             alertDialog.show();
-                            Toast.makeText(MainActivity.this,"You chose to "+mDialogItems[i],Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this,getString(R.string.your_choice)+mDialogItems[i],Toast.LENGTH_LONG).show();
                             break;
 
                     }
                         dialogInterface.dismiss();
                     }
                 });
-                mBuilder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                mBuilder.setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -216,12 +216,12 @@ public class MainActivity extends AppCompatActivity  {
                     mRecyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this,2));
                     mRecyclerView.addItemDecoration(new DividerItemDecoration(MainActivity.this,GridLayoutManager.VERTICAL));
                     mRecyclerView.addItemDecoration(new DividerItemDecoration(MainActivity.this,GridLayoutManager.HORIZONTAL));
-                    Toast.makeText(MainActivity.this,"Grid Layout",Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this,getString(R.string.grid_layout),Toast.LENGTH_LONG).show();
                 } else {
                     //setting the recycler view for linear layout
                     mRecyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
                     mRecyclerView.addItemDecoration(new DividerItemDecoration(MainActivity.this,LinearLayoutManager.VERTICAL));
-                    Toast.makeText(MainActivity.this,"Linear Layout",Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this,getString(R.string.linear_layout),Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -239,13 +239,13 @@ public class MainActivity extends AppCompatActivity  {
         switch (item.getItemId()){
             //sort by name using collections and notifying adapter about the changes
             case R.id.menu_sort_by_name:
-                Toast.makeText(MainActivity.this,"Sort By Name",Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this,getString(R.string.sortByName),Toast.LENGTH_LONG).show();
                 Collections.sort(studentList,new SortByName());
                 mAdapter.notifyDataSetChanged();
                 return true;
             //sort by roll number using collections and notifying adapter about the changes
             case R.id.menu_sort_by_roll:
-                Toast.makeText(MainActivity.this,"Sort By Roll No",Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this,getString(R.string.sortByRoll),Toast.LENGTH_LONG).show();
                 Collections.sort(studentList,new SortByRoll());
                 mAdapter.notifyDataSetChanged();
                 return true;

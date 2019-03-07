@@ -1,5 +1,6 @@
 package com.example.studentmanagementsystem.Activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -32,7 +33,7 @@ public class AddStudentActivity extends AppCompatActivity {
 
        //intent picks up the mode type and matches with dialog box modes to perform operations
        if(intent.getStringExtra(Constant.MODE).equals(Constant.NORMAL)) {
-           setTitle("Add Student");
+           setTitle(R.string.addStudent);
            saveButton.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
@@ -49,19 +50,19 @@ public class AddStudentActivity extends AppCompatActivity {
     public void saveData(){
         //to check if the the entered name is in valid format
         if (!Validate.isValidName(name.getText().toString())){
-            Toast.makeText(AddStudentActivity.this,"Invalid Name",
+            Toast.makeText(AddStudentActivity.this,getString(R.string.invalidName),
                     Toast.LENGTH_LONG).show();
             return;
         }
         //to check if the the entered roll number is in valid format
         if (!Validate.isValidRollNo(roll.getText().toString())){
-            Toast.makeText(AddStudentActivity.this,"Invalid Roll No",
+            Toast.makeText(AddStudentActivity.this,getString(R.string.invalidRoll),
                     Toast.LENGTH_LONG).show();
             return;
         }
         //to check if the the entered roll number is unique or not
         if (!Validate.isUniqueRollNo(roll.getText().toString().trim())) {
-            Toast.makeText(AddStudentActivity.this, "Roll No not unique",
+            Toast.makeText(AddStudentActivity.this, getString(R.string.rollNotUnique),
                     Toast.LENGTH_LONG).show();
             return;
 
@@ -81,7 +82,7 @@ public class AddStudentActivity extends AppCompatActivity {
     *@param intent - to take details from Main Activity
     */
     public void viewMode(Button saveButton,EditText name,EditText roll,Intent intent){
-        setTitle("Student Details ");
+        setTitle(R.string.details);
         saveButton.setVisibility(View.INVISIBLE);
         name.setText(intent.getStringExtra(Constant.VIEW_NAME));
         name.setTypeface(Typeface.DEFAULT_BOLD);
@@ -94,31 +95,32 @@ public class AddStudentActivity extends AppCompatActivity {
     method to edit details of student
     *@param saveButton - to update details of student
     */
-    public void editMode(Button saveButton,Intent intent) {
-        setTitle("Edit Student Details ");
+    @SuppressLint("SetTextI18n")
+    public void editMode(Button saveButton, Intent intent) {
+        setTitle(R.string.edit);
         name.setText(intent.getStringExtra(Constant.VIEW_NAME));
         roll.setText(intent.getStringExtra(Constant.VIEW_ROLL));
         position=getIntent().getStringExtra(Constant.POSITION);
-        saveButton.setText("Update");
+        saveButton.setText(getString(R.string.update));
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //to check if the the entered name is in valid format
                 if (!Validate.isValidName(name.getText().toString())) {
-                    Toast.makeText(AddStudentActivity.this, "Invalid Name",
+                    Toast.makeText(AddStudentActivity.this,getString(R.string.invalidName),
                             Toast.LENGTH_LONG).show();
                     return;
                 }
                 //to check if the the entered roll number is in valid format
                 if (!Validate.isValidRollNo(roll.getText().toString())) {
-                    Toast.makeText(AddStudentActivity.this, "Invalid Roll No",
+                    Toast.makeText(AddStudentActivity.this,getString(R.string.invalidRoll),
                             Toast.LENGTH_LONG).show();
                     return;
 
                 }
                 //to check if the the entered roll number is unique or not
                 if (!Validate.isUniqueRollNo(roll.getText().toString())) {
-                    Toast.makeText(AddStudentActivity.this, "Roll Number not unique",
+                    Toast.makeText(AddStudentActivity.this, getString(R.string.rollNotUnique),
                             Toast.LENGTH_LONG).show();
                     return;
 
