@@ -16,15 +16,15 @@
 
 
         <ImageView
-            android:id="@+id/ivProfilePicture"
-            android:layout_width="@dimen/image_width_b"
-            android:layout_height="@dimen/image_height_b"
-            android:layout_marginTop="@dimen/image_margin_top_b"
+            android:id="@+id/iv_addStudent"
+            android:layout_width="@dimen/image_width_add_student"
+            android:layout_height="@dimen/image_height_add_student"
+            android:layout_marginTop="@dimen/image_margin_top_add_student"
             android:scaleType="centerCrop"
             android:src="@drawable/add_student" />
 
         <EditText
-            android:id="@+id/etStudentName"
+            android:id="@+id/et_studentName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/enter_name"
@@ -45,7 +45,7 @@
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimaryDark"
         android:text="@string/save"
-        android:textSize="@dimen/btn_text_size" />
+        android:textSize="@dimen/btn_save_text_size" />
 
 
 </RelativeLayout>

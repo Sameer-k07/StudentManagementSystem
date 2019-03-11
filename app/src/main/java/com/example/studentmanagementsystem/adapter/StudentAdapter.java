@@ -17,12 +17,12 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.MyViewHo
     private ArrayList<Student> mStudentList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView mName, mRoll;
+        private TextView mName, mRollNo;
         //holds the particular view of recycler view
         public MyViewHolder(View view) {
             super(view);
-            mName = (TextView) view.findViewById(R.id.tv_name);
-            mRoll = (TextView) view.findViewById(R.id.tv_roll);
+            mName = view.findViewById(R.id.tv_name);
+            mRollNo = view.findViewById(R.id.tv_rollNo);
         }
     }
     /*creates the view
@@ -47,9 +47,9 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull StudentAdapter.MyViewHolder myViewHolder, int i) {
         Student student = mStudentList.get(i);
-        MyViewHolder viewHolder = (MyViewHolder) myViewHolder;
+        MyViewHolder viewHolder = myViewHolder;
         viewHolder.mName.setText(student.getmName());
-        viewHolder.mRoll.setText(student.getmRoll());
+        viewHolder.mRollNo.setText(student.getmRollNo());
     }
     /*
     *@return size of arraylist to be inflated
