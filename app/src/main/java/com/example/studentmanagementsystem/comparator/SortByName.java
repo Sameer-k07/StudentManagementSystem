@@ -1,6 +1,6 @@
-package com.example.studentmanagementsystem.Comparator;
+package com.example.studentmanagementsystem.comparator;
 
-import com.example.studentmanagementsystem.Model.Student;
+import com.example.studentmanagementsystem.model.Student;
 
 import java.util.Comparator;
 

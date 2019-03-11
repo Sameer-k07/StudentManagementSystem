@@ -1,4 +1,4 @@
-package com.example.studentmanagementsystem.Model;
+package com.example.studentmanagementsystem.model;
 
 public class Student {
     private String mName,mRoll;

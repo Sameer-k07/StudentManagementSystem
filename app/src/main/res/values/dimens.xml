@@ -11,4 +11,7 @@
     <dimen name="tv_text_size_name">25sp</dimen>
     <dimen name="tv_text_size_roll">25sp</dimen>
     <dimen name="padding_left">8dp</dimen>
+    <dimen name="font_12sp">12sp</dimen>
+    <dimen name="dimen_20dp">20dp</dimen>
+    <dimen name="main_Activity_profile_picture__wiidth">200dp</dimen>
 </resources>

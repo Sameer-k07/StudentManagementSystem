@@ -1,4 +1,4 @@
-package com.example.studentmanagementsystem.Listener;
+package com.example.studentmanagementsystem.listener;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

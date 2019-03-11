@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Student Management System</string>
+    <string name="app_name" translatable="false">Student Management System</string>
     <string name="enter_name">Enter Name</string>
     <string name="enter_roll_no">Enter Roll No</string>
     <string name="save">Save</string>
@@ -21,7 +21,9 @@
     <string name="details">Student Details</string>
     <string name="update">Update</string>
     <string name="edit">Edit Student Details</string>
-    <string name="your_choice">You chose to</string>
+    <string name="your_choice_view">You chose to View</string>
+    <string name="your_choice_edit">You chose to Edit</string>
+    <string name="your_choice_delete">You chose to Delete</string>
 
 
     <string-array name="Dialog_Operations">

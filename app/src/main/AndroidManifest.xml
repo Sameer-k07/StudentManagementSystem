@@ -3,16 +3,16 @@
     package="com.example.studentmanagementsystem">
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.AddStudentActivity"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".Activity.MainActivity"
+        <activity android:name=".activity.AddStudentActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.MainActivity"
+           android:theme="@style/AppTheme.Splash"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

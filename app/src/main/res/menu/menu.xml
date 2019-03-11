@@ -11,7 +11,7 @@
     android:id="@+id/menu_dropdown"
     android:title="Sort"
     app:showAsAction="always"
-    android:icon="@drawable/drop">
+    android:icon="@drawable/dropdown">
 
     <menu>
         <item

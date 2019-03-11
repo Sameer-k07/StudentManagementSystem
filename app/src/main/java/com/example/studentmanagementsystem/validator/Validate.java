@@ -1,10 +1,9 @@
-package com.example.studentmanagementsystem.Validator;
+package com.example.studentmanagementsystem.validator;
 
-import com.example.studentmanagementsystem.Activity.MainActivity;
-import com.example.studentmanagementsystem.Constant.Constant;
-import com.example.studentmanagementsystem.Model.Student;
+import com.example.studentmanagementsystem.activity.MainActivity;
+import com.example.studentmanagementsystem.constant.Constant;
+import com.example.studentmanagementsystem.model.Student;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

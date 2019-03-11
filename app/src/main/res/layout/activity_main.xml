@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.MainActivity">
+    tools:context=".activity.MainActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -20,11 +20,11 @@
     <ImageView
         android:layout_width="@dimen/image_width_a"
         android:layout_height="@dimen/image_height_a"
-        android:id="@+id/image_a"
+        android:id="@+id/iv_empty"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/image_margin_top_a"
         android:scaleType="centerCrop"
-        android:src="@drawable/a"/>
+        android:src="@drawable/emptyview"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
