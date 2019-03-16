@@ -1,44 +1,57 @@
 package com.example.studentmanagementsystem.activity;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Typeface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.studentmanagementsystem.BackgroundIntentService;
+import com.example.studentmanagementsystem.BackgroundAsyncTaskOperations;
+import com.example.studentmanagementsystem.BackgroundService;
 import com.example.studentmanagementsystem.constant.Constant;
 import com.example.studentmanagementsystem.R;
+import com.example.studentmanagementsystem.database.DatabaseHelper;
 import com.example.studentmanagementsystem.model.Student;
 import com.example.studentmanagementsystem.validator.Validate;
 
 import java.util.ArrayList;
 
 public class AddStudentActivity extends AppCompatActivity {
+
     private Button mSaveButton;
     private EditText mEtStudentName, mEtStudentRollNo;
-    private String mPosition;
+    private DatabaseHelper db;
+    private String[] mDialogItems={"ASYNC","SERVICE","INTENT SERVICE"};
+
+
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_student);
+
         //to initialize button and editText fields
         initValues();
+
+        //initializing database
+        db = new DatabaseHelper(this);
+
         //to perform operations and sending data through intent
         setValuesFromIntent();
     }
-
+    //to initialize button and editText fields
     private void initValues() {
         mSaveButton = findViewById(R.id.btn_save);
         mEtStudentName = findViewById(R.id.et_studentName);
         mEtStudentRollNo = findViewById(R.id.et_studentRoll);
     }
-
+    //to perform operations and sending data through intent
     private void setValuesFromIntent(){
         Intent intent = getIntent();
         final ArrayList<Student> studentList=intent.getParcelableArrayListExtra("mStudentList");
@@ -57,6 +70,55 @@ public class AddStudentActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    //method to generate dialog box for choosing your operation
+    private void generateDialogBox(final String operation,final String name,final String rollNo){
+        //alert dialog box to show list of operations
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(AddStudentActivity.this);
+        mBuilder.setTitle(R.string.choose);
+        mBuilder.setSingleChoiceItems(mDialogItems, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+
+                switch(i){
+                    case Constant.ASYNC :
+                        (new BackgroundAsyncTaskOperations(AddStudentActivity.this)).execute(operation,name,rollNo);
+                        finish();
+                        break;
+                    case Constant.SERVICE :
+                        Intent service=new Intent(AddStudentActivity.this, BackgroundService.class);
+                        service.putExtra(Constant.OPERATION,operation);
+                        service.putExtra(Constant.NAME,name);
+                        service.putExtra(Constant.ROLL_NO,rollNo);
+                        startService(service);
+                        finish();
+                        break;
+                    case Constant.INTENT_SERVICE :
+                        Intent intent=new Intent(AddStudentActivity.this, BackgroundIntentService.class);
+                        intent.putExtra(Constant.OPERATION,operation);
+                        intent.putExtra(Constant.NAME,name);
+                        intent.putExtra(Constant.ROLL_NO,rollNo);
+                        startService(intent);
+                        finish();
+                        break;
+                    default:
+                        break;
+
+                }
+            }
+        });
+        mBuilder.setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog mDialog = mBuilder.create();
+        mDialog.show();
+    }
+
+
     /*method to view data
     *@param intent - to pass data
     *@param studentList - arraylist of Student object
@@ -70,6 +132,7 @@ public class AddStudentActivity extends AppCompatActivity {
             }
         });
     }
+
     /*method to save the details of the student
     *@param studentList - arraylist of Student object
     */
@@ -93,12 +156,14 @@ public class AddStudentActivity extends AppCompatActivity {
             return;
 
         }
-        //to return name and roll number through intent to Main Activity
+        //to return name and roll number through intent to Main Activity and save data using preferred operation
         Intent returnIntent = getIntent();
+        String name = mEtStudentName.getText().toString();
+        String roll = mEtStudentRollNo.getText().toString();
         returnIntent.putExtra(Constant.NAME, mEtStudentName.getText().toString());
         returnIntent.putExtra(Constant.ROLL_NO, mEtStudentRollNo.getText().toString());
         setResult(RESULT_OK, returnIntent);
-        finish();
+        generateDialogBox(Constant.NORMAL,name,roll);
     }
 
     /*
@@ -124,12 +189,18 @@ public class AddStudentActivity extends AppCompatActivity {
         setTitle(R.string.edit);
         mEtStudentName.setText(intent.getStringExtra(Constant.VIEW_NAME));
         mEtStudentRollNo.setText(intent.getStringExtra(Constant.VIEW_ROLL));
-        mPosition = getIntent().getStringExtra(Constant.POSITION);
         mSaveButton.setText(getString(R.string.update));
+        //to return name and roll number through intent to Main Activity and update data using preferred operation
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveData(studentList);
+                String name =mEtStudentName.getText().toString();
+                String roll =mEtStudentRollNo.getText().toString();
+                Intent returnIntent = getIntent();
+                returnIntent.putExtra(Constant.NAME,name);
+                returnIntent.putExtra(Constant.ROLL_NO,roll);
+                setResult(RESULT_OK, returnIntent);
+                generateDialogBox(Constant.EDIT,name,roll);
             }
         });
     }

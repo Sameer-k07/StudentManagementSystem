@@ -41,7 +41,7 @@ public class Validate {
     *@param studentList - arraylist of object Student
     *@return false if roll no is unique else true
     */
-    public static boolean isUniqueRollNo(String rollNo,final ArrayList<Student> studentList){
+   public static boolean isUniqueRollNo(String rollNo,final ArrayList<Student> studentList){
         for(Student student: studentList){
             if(student.getmRollNo().equals(rollNo)){
                 return false;

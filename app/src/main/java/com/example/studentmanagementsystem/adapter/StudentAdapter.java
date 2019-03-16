@@ -27,7 +27,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.MyViewHo
     }
     /*creates the view
     *@param viewGroup - contains collection of views
-    *@param i - position or index of view
+    *@param i - viewType
     *@return particular view of recycler view
     */
     @NonNull

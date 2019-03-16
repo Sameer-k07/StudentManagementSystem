@@ -16,7 +16,7 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/noStudent">
+    android:id="@+id/rl_noStudent">
     <ImageView
         android:layout_width="@dimen/image_width_no_student"
         android:layout_height="@dimen/image_height_no_student"

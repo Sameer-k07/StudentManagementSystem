@@ -46,6 +46,4 @@
         android:background="@color/colorPrimaryDark"
         android:text="@string/save"
         android:textSize="@dimen/btn_save_text_size" />
-
-
 </RelativeLayout>

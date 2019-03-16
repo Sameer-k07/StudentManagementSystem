@@ -2,7 +2,7 @@
 <resources>
     <dimen name="image_width_add_student">144dp</dimen>
     <dimen name="image_height_add_student">144dp</dimen>
-    <dimen name="image_margin_top_add_student">40dp</dimen>
+    <dimen name="image_margin_top_add_student">60dp</dimen>
     <dimen name="btn_save_text_size">20sp</dimen>
     <dimen name="tv_no_student_text_size">40sp</dimen>
     <dimen name="image_width_no_student">144dp</dimen>

@@ -4,8 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Student implements Parcelable {
-    private String mName,mRollNo;
 
+
+    private String mName,mRollNo;
     /*
     *@param name - name of student
     *@param rollNo - roll number of student
@@ -67,4 +68,5 @@ public class Student implements Parcelable {
         dest.writeString(mName);
         dest.writeString(mRollNo);
     }
+
 }//end of Student class

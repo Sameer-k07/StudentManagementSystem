@@ -10,7 +10,6 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,10 +19,12 @@ import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.example.studentmanagementsystem.BackgroundAsyncTaskGet;
 import com.example.studentmanagementsystem.adapter.StudentAdapter;
 import com.example.studentmanagementsystem.comparator.SortByName;
 import com.example.studentmanagementsystem.comparator.SortByRollNo;
 import com.example.studentmanagementsystem.constant.Constant;
+import com.example.studentmanagementsystem.database.DatabaseHelper;
 import com.example.studentmanagementsystem.listener.TouchListener;
 import com.example.studentmanagementsystem.model.Student;
 import com.example.studentmanagementsystem.R;
@@ -31,29 +32,41 @@ import com.example.studentmanagementsystem.R;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity implements BackgroundAsyncTaskGet.Callback {
 
-    Button addButton;
-    RelativeLayout rlNoStudent;
+    private Button mAddButton;
+    private RelativeLayout mRlNoStudent;
     private ArrayList<Student> mStudentList = new ArrayList<Student>();
     private RecyclerView mRecyclerView;
     private StudentAdapter mAdapter;
     private String[] mDialogItems;
     private int pos;
-    private static final int VIEW=0;
-    private static final int EDIT=1;
-    private static final int DELETE=2;
-    private static final int RC_VIEW=1;
-    private static final int RC_EDIT=2;
+    private DatabaseHelper db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mRlNoStudent=findViewById(R.id.rl_noStudent);
+        BackgroundAsyncTaskGet backgroundTask = new BackgroundAsyncTaskGet(this,this);
+        backgroundTask.execute();
+        //initializing database
+
         //to initialize recycler view and adapters
         init();
+        db = new DatabaseHelper(this);
+        //to handle layout if elements are already there in database
+        if(db.getStudentsCount()==0){
+            mRlNoStudent.setVisibility(View.VISIBLE);
+        }else{
+            mRlNoStudent.setVisibility(View.INVISIBLE);
+        }
         //to perform operations on recycler view for view,edit or delete
         recyclerViewOperations();
+       // db = new DatabaseHelper(this);
+
     }
 
     @Override
@@ -110,11 +123,10 @@ public class MainActivity extends AppCompatActivity  {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    public void init(){
+    //to initialize recycler view and adapter
+    private void init(){
         mDialogItems=getResources().getStringArray(R.array.Dialog_Operations);
         mRecyclerView = findViewById(R.id.recycler_view);
-        mAdapter = new StudentAdapter(mStudentList);
 
         //default layout for recycler view
         mRecyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
@@ -123,23 +135,22 @@ public class MainActivity extends AppCompatActivity  {
         //to show effect while on clicking elements in recycler view
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         //setting adapter to recycler view
-        mRecyclerView.setAdapter(mAdapter);
-        addButton = findViewById(R.id.btn_addStudent);
+        mAddButton = findViewById(R.id.btn_addStudent);
 
         //setting OnClickListener on add button to add data through intent via startActivityForResult method
-        addButton.setOnClickListener(new View.OnClickListener() {
+        mAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddStudentActivity.class);
                 intent.putParcelableArrayListExtra("mStudentList", mStudentList);
                 intent.putExtra(Constant.MODE,Constant.NORMAL);
-                startActivityForResult(intent, RC_VIEW);
+                startActivityForResult(intent, Constant.RC_VIEW);
             }
         });
 
     }
-
-     public void recyclerViewOperations(){
+    //to perform operations on recycler view
+     private void recyclerViewOperations(){
             //performing operations such as view,edit or delete while clicking on touch listener
             mRecyclerView.addOnItemTouchListener(new TouchListener(MainActivity.this, mRecyclerView, new TouchListener.ClickListener() {
                 @Override
@@ -155,14 +166,14 @@ public class MainActivity extends AppCompatActivity  {
                             final Intent intent = new Intent(MainActivity.this, AddStudentActivity.class);
 
                             switch(i){
-                                case VIEW :
+                                case Constant.VIEW_DATA :
                                     viewDetails(intent,student);
                                     break;
-                                case EDIT :
+                                case Constant.EDIT_DATA :
                                     setposition(position);
                                     editDetails(intent,student);
                                     break;
-                                case DELETE :
+                                case Constant.DELETE_DATA:
                                     setposition(position);
                                     deleteDetails();
                                     break;
@@ -192,7 +203,7 @@ public class MainActivity extends AppCompatActivity  {
         @param intent - intent to pass data
         @param student - object to get student details
         */
-        public void viewDetails(Intent intent,Student student){
+        private void viewDetails(Intent intent,Student student){
             intent.putExtra(Constant.MODE,Constant.VIEW);
             Toast.makeText(MainActivity.this,getString(R.string.your_choice_view),Toast.LENGTH_LONG).show();
             intent.putExtra(Constant.VIEW_NAME,student.getmName());
@@ -203,17 +214,19 @@ public class MainActivity extends AppCompatActivity  {
         @param intent - intent to pass data
         @param student - object to get student details
         */
-        public void editDetails(Intent intent,Student student){
+         private void editDetails(Intent intent,Student student){
             intent.putExtra(Constant.MODE,Constant.EDIT);
             intent.putExtra("mStudentList",mStudentList);
-            intent.putExtra(Constant.VIEW_NAME,student.getmName());
-            intent.putExtra(Constant.VIEW_ROLL, student.getmRollNo());
-            intent.putExtra(Constant.POSITION,Integer.toString(getposition()));
+            intent.putExtra(Constant.VIEW_NAME,mStudentList.get(pos).getmName());
+            intent.putExtra(Constant.VIEW_ROLL, mStudentList.get(pos).getmRollNo());
             Toast.makeText(MainActivity.this,getString(R.string.your_choice_edit),Toast.LENGTH_LONG).show();
-            startActivityForResult(intent, RC_EDIT);
+            startActivityForResult(intent, Constant.RC_EDIT);
         }
+
+
+
         //to delete details of student
-        public void deleteDetails(){
+        private void deleteDetails(){
             //alert dialog box for confirmation before deleting details of particular student
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
             alertDialogBuilder.setMessage(R.string.confirmation);
@@ -221,6 +234,7 @@ public class MainActivity extends AppCompatActivity  {
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface arg0, int arg1) {
+                            db.deleteStudent(mStudentList.get(pos));
                             mStudentList.remove(getposition());
                             //if list is empty after deletion, show initial MainActivity
                             if(mStudentList.isEmpty()){
@@ -248,13 +262,13 @@ public class MainActivity extends AppCompatActivity  {
     /*
     *@param position - index of the edited element
     */
-    public void setposition(int position){
+    private void setposition(int position){
         pos=position;
     }
     /*
      *@return index of the edited element
      */
-    public int getposition(){
+    private int getposition(){
         return pos;
     }
     /*
@@ -263,32 +277,42 @@ public class MainActivity extends AppCompatActivity  {
     *@param data - data passed through intent
     */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        rlNoStudent = findViewById(R.id.noStudent);
+        mRlNoStudent = findViewById(R.id.rl_noStudent);
         //set no student added screen when count of students is zero
-        if(mAdapter.getItemCount()==-1){
-            rlNoStudent.setVisibility(View.VISIBLE);
-        }else {
-            rlNoStudent.setVisibility(View.INVISIBLE);
+        if (mAdapter.getItemCount() == -1) {
+            mRlNoStudent.setVisibility(View.VISIBLE);
+        } else {
+            mRlNoStudent.setVisibility(View.INVISIBLE);
         }
-        //matching requestCode and resultCode
-        if (requestCode == RC_VIEW && resultCode == RESULT_OK) {
-            //fetching data through intent and adding it to list and notifying adapter about the changes
-            String name=data.getStringExtra(Constant.NAME);
-            String roll=data.getStringExtra(Constant.ROLL_NO);
-            mStudentList.add(new Student(name,roll));
-            mAdapter.notifyDataSetChanged();
-
+        //comparing resultCode
+        if (resultCode == RESULT_OK) {
+            //comparing requestCode
+            if (requestCode == Constant.RC_VIEW) {
+                //fetching data through intent and adding it to list and notifying adapter about the changes
+                String name = data.getStringExtra(Constant.NAME);
+                String roll = data.getStringExtra(Constant.ROLL_NO);
+                mStudentList.add(new Student(name, roll));
+                mAdapter.notifyDataSetChanged();
             }
-        if (requestCode == RC_EDIT && resultCode == RESULT_OK) {
-            //fetching updated data through intent and adding it to list and notifying adapter about the changes
-            String updatedName=data.getStringExtra(Constant.NAME);
-            String updatedRoll=data.getStringExtra(Constant.ROLL_NO);
-            //updating information at same index
-            Student updatedInfo= mStudentList.get(getposition());
-            updatedInfo.setmName(updatedName);
-            updatedInfo.setmRollNo(updatedRoll);
-            mAdapter.notifyDataSetChanged();
+            if (requestCode == Constant.RC_EDIT) {
+                //fetching updated data through intent and adding it to list and notifying adapter about the changes
+                String updatedName = data.getStringExtra(Constant.NAME);
+                String updatedRoll = data.getStringExtra(Constant.ROLL_NO);
+                Student student = mStudentList.get(pos);
+                student.setmName(updatedName);
+                student.setmRollNo(updatedRoll);
+                mAdapter.notifyDataSetChanged();
+            }
         }
+    }
+    /*method to get result from async task through callback
+    *@param result - object of arraylist student
+    */
+    @Override
+    public void getResult(ArrayList<Student> result) {
+        mStudentList=result;
+        mAdapter = new StudentAdapter(mStudentList);
+        mRecyclerView.setAdapter(mAdapter);
     }
 }//end of MainActivity class
 
