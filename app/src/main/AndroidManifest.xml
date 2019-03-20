@@ -9,15 +9,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <service android:name=".backgroundTasks.BackgroundIntentService"
-            android:exported="false"/>
-        <service android:name=".backgroundTasks.BackgroundService"
-            android:exported="false"/>
-        <activity android:name=".activity.AddStudentActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.MainActivity"
-           android:theme="@style/AppTheme.Splash"
-            android:screenOrientation="portrait">
+        <receiver
+            android:name=".backgroundTasks.MyReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
+        <service
+            android:name=".backgroundTasks.BackgroundIntentService"
+            android:exported="false" />
+        <service
+            android:name=".backgroundTasks.BackgroundService"
+            android:exported="false" />
+
+        <activity
+            android:name=".activity.AddStudentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

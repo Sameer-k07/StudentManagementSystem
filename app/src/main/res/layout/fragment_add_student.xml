@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/frag2"
+    tools:context=".activity.AddStudentActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginStart="@dimen/dimen_20dp"
+        android:layout_marginEnd="@dimen/dimen_20dp"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:id="@+id/iv_addStudent"
+            android:layout_width="@dimen/image_width_add_student"
+            android:layout_height="@dimen/image_height_add_student"
+            android:layout_marginTop="@dimen/image_margin_top_add_student"
+            android:scaleType="centerCrop"
+            android:src="@drawable/add_student" />
+
+        <EditText
+            android:id="@+id/et_studentName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_name"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/et_studentRoll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_roll_no"
+            android:inputType="number" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimaryDark"
+        android:text="@string/save"
+        android:textSize="@dimen/btn_save_text_size" />
+</RelativeLayout>

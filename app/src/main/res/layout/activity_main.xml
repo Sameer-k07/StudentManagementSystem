@@ -1,46 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MainActivity">
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"/>
-
-
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/rl_noStudent">
-    <ImageView
-        android:layout_width="@dimen/image_width_no_student"
-        android:layout_height="@dimen/image_height_no_student"
-        android:id="@+id/iv_noStudent"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/image_margin_top_no_student"
-        android:scaleType="centerCrop"
-        android:src="@drawable/no_student"/>
-    <TextView
+    android:orientation="vertical">
+    <android.support.design.widget.TabLayout
+        android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/no_student_added"
-        android:gravity="center"
-        android:layout_centerInParent="true"
-        android:textSize="@dimen/tv_no_student_text_size"
-        android:id="@+id/tv_noStudent"/>
-</RelativeLayout>
-        <Button
-            android:id="@+id/btn_addStudent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:text="@string/add_student"
-            android:background="@color/colorPrimaryDark"/>
+        app:tabMode="fixed" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vpPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </android.support.v4.view.ViewPager>
 
-</RelativeLayout>
+</LinearLayout>
