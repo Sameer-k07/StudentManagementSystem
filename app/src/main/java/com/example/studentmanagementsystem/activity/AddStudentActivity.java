@@ -11,9 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.studentmanagementsystem.backgroundTasks.BackgroundIntentService;
-import com.example.studentmanagementsystem.backgroundTasks.BackgroundAsyncTaskOperations;
-import com.example.studentmanagementsystem.backgroundTasks.BackgroundService;
+import com.example.studentmanagementsystem.backgroundTask.BackgroundIntentService;
+import com.example.studentmanagementsystem.backgroundTask.BackgroundAsyncTaskOperations;
+import com.example.studentmanagementsystem.backgroundTask.BackgroundService;
 import com.example.studentmanagementsystem.constant.Constant;
 import com.example.studentmanagementsystem.R;
 import com.example.studentmanagementsystem.database.DatabaseHelper;

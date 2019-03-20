@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <service android:name=".backgroundTasks.BackgroundIntentService"
+        <service android:name=".backgroundTask.BackgroundIntentService"
             android:exported="false"/>
-        <service android:name=".backgroundTasks.BackgroundService"
+        <service android:name=".backgroundTask.BackgroundService"
             android:exported="false"/>
         <activity android:name=".activity.AddStudentActivity"
             android:screenOrientation="portrait"/>

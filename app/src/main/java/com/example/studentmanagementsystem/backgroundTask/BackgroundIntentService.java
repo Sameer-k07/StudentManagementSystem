@@ -1,27 +1,27 @@
-package com.example.studentmanagementsystem.backgroundTasks;
+package com.example.studentmanagementsystem.backgroundTask;
 
-import android.app.Service;
+import android.app.IntentService;
 import android.content.Intent;
-import android.os.IBinder;
-
 import com.example.studentmanagementsystem.constant.Constant;
 import com.example.studentmanagementsystem.database.DatabaseHelper;
 
-public class BackgroundService extends Service {
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
+public class BackgroundIntentService extends IntentService {
+
+    // Creates an BackgroundIntentService.
+    public BackgroundIntentService() {
+        super("BackgroundIntentService");
+
     }
-    //to insert and update in database using service
+    /*
+    *to handle events i.e insertion and updation in database using BackgroundIntentService
+    */
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    protected void onHandleIntent(Intent intent) {
         DatabaseHelper DatabaseHelper=new DatabaseHelper(this);
         if(intent.getStringExtra(Constant.OPERATION).equals(Constant.NORMAL)){
             DatabaseHelper.insertStudent(intent.getStringExtra(Constant.NAME),intent.getStringExtra(Constant.ROLL_NO));
         }else if(intent.getStringExtra(Constant.OPERATION).equals(Constant.EDIT)){
             DatabaseHelper.updateStudent(intent.getStringExtra(Constant.NAME),intent.getStringExtra(Constant.ROLL_NO));
         }
-        stopSelf();
-        return START_NOT_STICKY;
     }
 }
