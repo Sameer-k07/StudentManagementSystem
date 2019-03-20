@@ -1,4 +1,4 @@
-package com.example.studentmanagementsystem;
+package com.example.studentmanagementsystem.communicator;
 
 import android.os.Bundle;
 

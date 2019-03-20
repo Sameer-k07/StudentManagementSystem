@@ -19,16 +19,16 @@ public final class Constant {
     public static final int VIEW_DATA=0;
     public static final int EDIT_DATA=1;
     public static final int DELETE_DATA=2;
-    public static final int RC_VIEW=1;
-    public static final int RC_EDIT=2;
+
 
     public static final int ASYNC=0;
     public static final int SERVICE=1;
     public static final int INTENT_SERVICE=2;
     public static final String OPERATION ="operation";
 
-    public static final String INSERT ="insert";
-    public static final String UPDATE ="update";
+    public static int NUM_ITEMS = 2;
+    public static final int STUDENT_LIST=0;
+    public static final int ADD_STUDENT=1;
 
 
 }

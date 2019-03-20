@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/frag_container"
+    android:orientation="vertical"
     tools:context=".activity.AddStudentActivity">
-
-
 </LinearLayout>

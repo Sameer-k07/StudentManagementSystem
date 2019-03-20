@@ -1,9 +1,8 @@
-package com.example.studentmanagementsystem;
+package com.example.studentmanagementsystem.fragment;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -12,6 +11,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,10 +24,11 @@ import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.example.studentmanagementsystem.communicator.Communication;
+import com.example.studentmanagementsystem.R;
 import com.example.studentmanagementsystem.activity.AddStudentActivity;
 import com.example.studentmanagementsystem.activity.MainActivity;
 import com.example.studentmanagementsystem.adapter.StudentAdapter;
-import com.example.studentmanagementsystem.backgroundTasks.BackgroundAsyncTaskGet;
 import com.example.studentmanagementsystem.comparator.SortByName;
 import com.example.studentmanagementsystem.comparator.SortByRollNo;
 import com.example.studentmanagementsystem.constant.Constant;
@@ -40,7 +41,6 @@ import java.util.Collections;
 
 
 public class StudentListFragment extends Fragment {
-//implements BackgroundAsyncTaskGet.Callback {
 
     private Button mAddButton;
     private RelativeLayout mRlNoStudent;
@@ -53,16 +53,8 @@ public class StudentListFragment extends Fragment {
     private Context mContext;
     private Communication mCommunication;
 
-
-
-    // TODO: Rename and change types of parameters
-
-
-
     public StudentListFragment() {
     }
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,16 +76,10 @@ public class StudentListFragment extends Fragment {
         }else{
             mRlNoStudent.setVisibility(View.INVISIBLE);
         }
-
         recyclerViewOperations();
         setHasOptionsMenu(true);
-        //BackgroundAsyncTaskGet backgroundTask = new BackgroundAsyncTaskGet(mContext,mContext);
-        //backgroundTask.execute();
         return view;
     }
-
-    // TODO: Rename method, update argument and hook method into UI event
-
 
     @Override
     public void onAttach(Context context) {
@@ -102,7 +88,7 @@ public class StudentListFragment extends Fragment {
         try {
             mCommunication=(Communication)mContext;
         }catch (ClassCastException e) {
-            throw new ClassCastException("Error in retrieving data. Please try again");
+            throw new ClassCastException(getString(R.string.error));
         }
     }
 
@@ -129,14 +115,13 @@ public class StudentListFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
         mAddButton = view.findViewById(R.id.btn_addStudent);
 
-
         //setting OnClickListener on add button to add data through intent via startActivityForResult method
         mAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle= new Bundle();
-
-                //((MainActivity)mContext).changeTab();
+                Bundle bundle=new Bundle();
+                bundle.putString(Constant.MODE,Constant.NORMAL);
+                mCommunication.communicateUpdate(bundle);
             }
         });
 
@@ -168,7 +153,6 @@ public class StudentListFragment extends Fragment {
                                 bundle.putString(Constant.NAME,student.getmName());
                                 bundle.putString(Constant.ROLL_NO,student.getmRollNo());
                                 mCommunication.communicateUpdate(bundle);
-                                //((MainActivity)mContext).changeTab();
                                 break;
                             case Constant.DELETE_DATA:
                                 setposition(position);
@@ -239,8 +223,6 @@ public class StudentListFragment extends Fragment {
         Toast.makeText(getContext(),getString(R.string.your_choice_delete),Toast.LENGTH_LONG).show();
 
     }
-
-
     //this is done to take position of edited element and use the position in OnActivityResult
     /*
      *@param position - index of the edited element
@@ -255,19 +237,14 @@ public class StudentListFragment extends Fragment {
         return pos;
     }
 
-    /*method to get result from async task through callback
-     *@param result - object of arraylist student
-     *//*
-    @Override
-    public void getResult(ArrayList<Student> result) {
-        mStudentList=result;
-        mAdapter = new StudentAdapter(mStudentList);
-        mRecyclerView.setAdapter(mAdapter);
-    }*/
 
+    /*
+    *method to add student
+    *@param bundle - to pass data
+    */
     public void addStudent(Bundle bundle){
         if(bundle.getString(Constant.MODE).equals(Constant.NORMAL)) {
-            Student student = new Student(bundle.getString("Name"), bundle.getString("Roll"));
+            Student student = new Student(bundle.getString(Constant.NAME), bundle.getString(Constant.ROLL_NO));
             mStudentList.add(student);
             mAdapter.notifyDataSetChanged();
         }else if(bundle.getString(Constant.MODE).equals(Constant.EDIT)){
