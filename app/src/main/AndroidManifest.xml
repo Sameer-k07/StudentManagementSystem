@@ -10,15 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <receiver
-            android:name=".backgroundTasks.MyReceiver"
+            android:name=".backgroundTask.MyReceiver"
             android:enabled="true"
             android:exported="true"></receiver>
 
         <service
-            android:name=".backgroundTasks.BackgroundIntentService"
+            android:name=".backgroundTask.BackgroundIntentService"
             android:exported="false" />
         <service
-            android:name=".backgroundTasks.BackgroundService"
+            android:name=".backgroundTask.BackgroundService"
             android:exported="false" />
 
         <activity

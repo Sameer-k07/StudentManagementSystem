@@ -1,4 +1,4 @@
-package com.example.studentmanagementsystem.backgroundTasks;
+package com.example.studentmanagementsystem.backgroundTask;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

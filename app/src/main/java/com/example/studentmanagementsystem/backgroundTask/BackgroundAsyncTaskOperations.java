@@ -1,4 +1,4 @@
-package com.example.studentmanagementsystem.backgroundTasks;
+package com.example.studentmanagementsystem.backgroundTask;
 
 import android.content.Context;
 import android.os.AsyncTask;
