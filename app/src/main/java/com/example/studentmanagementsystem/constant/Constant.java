@@ -25,6 +25,7 @@ public final class Constant {
     public static final int SERVICE=1;
     public static final int INTENT_SERVICE=2;
     public static final String OPERATION ="operation";
+    public static final String STUDENT_LIST_FROM_MAIN ="student_list" ;
 
     public static int NUM_ITEMS = 2;
     public static final int STUDENT_LIST=0;

@@ -21,7 +21,7 @@ public class MyViewPagerAdapter extends FragmentPagerAdapter {
         return Constant.NUM_ITEMS;
     }
     /*
-    *to get fragment to dispaly page
+    *to get fragment to display page
     *@param position - index
     *@return - fragment to display for that page
     */

@@ -106,21 +106,22 @@ public class StudentListFragment extends Fragment {
         mRlNoStudent = view.findViewById(R.id.rl_noStudent);
 
         //default layout for recycler view
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //to add dividers in view
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(mContext, LinearLayoutManager.VERTICAL));
         //to show effect while on clicking elements in recycler view
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         //setting adapter to recycler view
         mRecyclerView.setAdapter(mAdapter);
         mAddButton = view.findViewById(R.id.btn_addStudent);
 
-        //setting OnClickListener on add button to add data through intent via startActivityForResult method
+        //setting OnClickListener on add button to add data
         mAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle=new Bundle();
                 bundle.putString(Constant.MODE,Constant.NORMAL);
+                bundle.putParcelableArrayList(Constant.STUDENT_LIST_FROM_MAIN,mStudentList);
                 mCommunication.communicateUpdate(bundle);
             }
         });
@@ -129,7 +130,7 @@ public class StudentListFragment extends Fragment {
     //to perform operations on recycler view
     private void recyclerViewOperations(){
         //performing operations such as view,edit or delete while clicking on touch listener
-        mRecyclerView.addOnItemTouchListener(new TouchListener(getContext(), mRecyclerView, new TouchListener.ClickListener() {
+        mRecyclerView.addOnItemTouchListener(new TouchListener(mContext, mRecyclerView, new TouchListener.ClickListener() {
             @Override
             public void onClick(final View view, final int position) {
                 final Student student = mStudentList.get(position);
@@ -290,13 +291,13 @@ public class StudentListFragment extends Fragment {
         switch (item.getItemId()){
             //sort by name using collections and notifying adapter about the changes
             case R.id.menu_sort_by_name:
-                Toast.makeText(getContext(),getString(R.string.sortByName),Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext,getString(R.string.sortByName),Toast.LENGTH_LONG).show();
                 Collections.sort(mStudentList,new SortByName());
                 mAdapter.notifyDataSetChanged();
                 return true;
             //sort by roll number using collections and notifying adapter about the changes
             case R.id.menu_sort_by_roll:
-                Toast.makeText(getContext(),getString(R.string.sortByRoll),Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext,getString(R.string.sortByRoll),Toast.LENGTH_LONG).show();
                 Collections.sort(mStudentList,new SortByRollNo());
                 mAdapter.notifyDataSetChanged();
                 return true;

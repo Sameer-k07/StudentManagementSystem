@@ -21,7 +21,10 @@ import com.example.studentmanagementsystem.backgroundTask.BackgroundIntentServic
 import com.example.studentmanagementsystem.backgroundTask.BackgroundService;
 import com.example.studentmanagementsystem.constant.Constant;
 import com.example.studentmanagementsystem.database.DatabaseHelper;
+import com.example.studentmanagementsystem.model.Student;
 import com.example.studentmanagementsystem.validator.Validate;
+
+import java.util.ArrayList;
 
 
 public class AddStudentFragment extends Fragment {
@@ -33,6 +36,7 @@ public class AddStudentFragment extends Fragment {
     private String[] mDialogItems={"ASYNC","SERVICE","INTENT SERVICE"};
     private Context mContext;
     private Communication mCommunication;
+    private ArrayList<Student> mStudentList = new ArrayList<Student>();
 
     public AddStudentFragment() {
 
@@ -84,12 +88,13 @@ public class AddStudentFragment extends Fragment {
             mEtStudentRollNo.setText(bundle.getString(Constant.ROLL_NO));
             editMode();
         }else if(bundle.getString(Constant.MODE).equals(Constant.NORMAL)){
+            mStudentList=bundle.getParcelableArrayList(Constant.STUDENT_LIST_FROM_MAIN);
             onClickButton();
         }
     }
     /*
     *method to view details of student
-    *@param bundle - to pass data
+    *@param bundleData - to pass data
     */
     public void viewMode(Bundle bundleData){
         mEtStudentName.setText(bundleData.getString(Constant.VIEW_NAME));
@@ -186,12 +191,12 @@ public class AddStudentFragment extends Fragment {
                             Toast.LENGTH_LONG).show();
                     return;
                 }
-                /*//to check if the the entered roll number is unique or not
-                if (!Validate.isUniqueRollNo(mEtStudentRollNo.getText().toString().trim(),studentList)) {
+                //to check if the the entered roll number is unique or not
+                if (!Validate.isUniqueRollNo(mEtStudentRollNo.getText().toString().trim(),mStudentList)) {
                     Toast.makeText(getContext(), getString(R.string.rollNotUnique),
                             Toast.LENGTH_LONG).show();
                     return;
-                }*/
+                }
                 //to return name and roll number through bundle to StudentList Fragment and save data using preferred operation
                 String name = mEtStudentName.getText().toString();
                 String roll = mEtStudentRollNo.getText().toString();
