@@ -27,8 +27,7 @@ public final class Constant {
     public static final int INTENT_SERVICE=2;
     public static final String OPERATION ="operation";
 
-    public static final String INSERT ="insert";
-    public static final String UPDATE ="update";
-
+    public static final String DB_NAME = "student_db";
+    public static final int DB_VERSION=1;
 
 }

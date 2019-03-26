@@ -15,12 +15,15 @@ public class Student implements Parcelable {
         this.mName=name;
         this.mRollNo=rollNo;
     }
-
+    /*
+    *constructor used for parcel to read data
+    *@param in - object of parcel to read
+    */
     protected Student(Parcel in) {
         mName = in.readString();
         mRollNo = in.readString();
     }
-
+    //to bind data
     public static final Creator<Student> CREATOR = new Creator<Student>() {
         @Override
         public Student createFromParcel(Parcel in) {
@@ -63,6 +66,11 @@ public class Student implements Parcelable {
         return 0;
     }
 
+    /*
+    *write object values to parcel for storage
+    *@param dest - the parcel in which the object should be written
+    *@param flags - Additional flags about how the object should be written
+    */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(mName);

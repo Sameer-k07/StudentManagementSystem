@@ -14,6 +14,7 @@ public class BackgroundIntentService extends IntentService {
     }
     /*
     *to handle events i.e insertion and updation in database using BackgroundIntentService
+    *@param intent - to pass data
     */
     @Override
     protected void onHandleIntent(Intent intent) {

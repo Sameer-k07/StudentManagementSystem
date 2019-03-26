@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements BackgroundAsyncTa
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mRlNoStudent=findViewById(R.id.rl_noStudent);
         BackgroundAsyncTaskGet backgroundTask = new BackgroundAsyncTaskGet(this,this);
         backgroundTask.execute();
         //initializing database
@@ -65,8 +64,6 @@ public class MainActivity extends AppCompatActivity implements BackgroundAsyncTa
         }
         //to perform operations on recycler view for view,edit or delete
         recyclerViewOperations();
-       // db = new DatabaseHelper(this);
-
     }
 
     @Override
@@ -126,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements BackgroundAsyncTa
     //to initialize recycler view and adapter
     private void init(){
         mDialogItems=getResources().getStringArray(R.array.Dialog_Operations);
+        mRlNoStudent=findViewById(R.id.rl_noStudent);
         mRecyclerView = findViewById(R.id.recycler_view);
 
         //default layout for recycler view
@@ -142,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements BackgroundAsyncTa
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddStudentActivity.class);
-                intent.putParcelableArrayListExtra("mStudentList", mStudentList);
+                intent.putParcelableArrayListExtra(getString(R.string.student_list), mStudentList);
                 intent.putExtra(Constant.MODE,Constant.NORMAL);
                 startActivityForResult(intent, Constant.RC_VIEW);
             }
@@ -216,7 +214,7 @@ public class MainActivity extends AppCompatActivity implements BackgroundAsyncTa
         */
          private void editDetails(Intent intent,Student student){
             intent.putExtra(Constant.MODE,Constant.EDIT);
-            intent.putExtra("mStudentList",mStudentList);
+            intent.putExtra(getString(R.string.student_list),mStudentList);
             intent.putExtra(Constant.VIEW_NAME,mStudentList.get(pos).getmName());
             intent.putExtra(Constant.VIEW_ROLL, mStudentList.get(pos).getmRollNo());
             Toast.makeText(MainActivity.this,getString(R.string.your_choice_edit),Toast.LENGTH_LONG).show();

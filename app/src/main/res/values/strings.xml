@@ -24,6 +24,7 @@
     <string name="your_choice_view">You chose to View</string>
     <string name="your_choice_edit">You chose to Edit</string>
     <string name="your_choice_delete">You chose to Delete</string>
+    <string name="student_list">mStudentList</string>
 
 
     <string-array name="Dialog_Operations">

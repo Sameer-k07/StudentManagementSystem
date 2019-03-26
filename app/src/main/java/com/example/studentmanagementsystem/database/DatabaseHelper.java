@@ -14,10 +14,10 @@ import java.util.ArrayList;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = Constant.DB_VERSION;
 
     // Database Name
-    private static final String DATABASE_NAME = "student_db";
+    private static final String DATABASE_NAME = Constant.DB_NAME;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

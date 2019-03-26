@@ -54,7 +54,7 @@ public class AddStudentActivity extends AppCompatActivity {
     //to perform operations and sending data through intent
     private void setValuesFromIntent(){
         Intent intent = getIntent();
-        final ArrayList<Student> studentList=intent.getParcelableArrayListExtra("mStudentList");
+        final ArrayList<Student> studentList=intent.getParcelableArrayListExtra(getString(R.string.student_list));
         //intent picks up the mode type and matches with dialog box modes to perform operations
         switch (intent.getStringExtra(Constant.MODE)) {
             case Constant.NORMAL:
@@ -123,7 +123,7 @@ public class AddStudentActivity extends AppCompatActivity {
     *@param intent - to pass data
     *@param studentList - arraylist of Student object
     */
-    public void save(Intent intent, final ArrayList<Student> studentList){
+    private void save(Intent intent, final ArrayList<Student> studentList){
         setTitle(R.string.addStudent);
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,7 +136,7 @@ public class AddStudentActivity extends AppCompatActivity {
     /*method to save the details of the student
     *@param studentList - arraylist of Student object
     */
-    public void saveData(final ArrayList<Student> studentList) {
+    private void saveData(final ArrayList<Student> studentList) {
         //to check if the the entered name is in valid format
         if (!Validate.isValidName(mEtStudentName.getText().toString().trim())) {
             Toast.makeText(AddStudentActivity.this, getString(R.string.invalidName),
@@ -170,7 +170,7 @@ public class AddStudentActivity extends AppCompatActivity {
     method to view details of student
     *@param intent - to take details from Main Activity
     */
-    public void viewMode(Intent intent) {
+    private void viewMode(Intent intent) {
         setTitle(R.string.details);
         mSaveButton.setVisibility(View.INVISIBLE);
         mEtStudentName.setText(intent.getStringExtra(Constant.VIEW_NAME));
@@ -185,7 +185,7 @@ public class AddStudentActivity extends AppCompatActivity {
     *@param studentList - arraylist of Student object
     */
     @SuppressLint("SetTextI18n")
-    public void editMode(Intent intent,final ArrayList<Student> studentList) {
+    private void editMode(Intent intent,final ArrayList<Student> studentList) {
         setTitle(R.string.edit);
         mEtStudentName.setText(intent.getStringExtra(Constant.VIEW_NAME));
         mEtStudentRollNo.setText(intent.getStringExtra(Constant.VIEW_ROLL));
@@ -204,4 +204,5 @@ public class AddStudentActivity extends AppCompatActivity {
             }
         });
     }
+
 }//end of AddStudentActivity class
