@@ -31,5 +31,7 @@ public final class Constant {
     public static final int STUDENT_LIST=0;
     public static final int ADD_STUDENT=1;
 
+    public static final String ACTION = "action";
+
 
 }

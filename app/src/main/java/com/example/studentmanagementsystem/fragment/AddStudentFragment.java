@@ -1,11 +1,14 @@
 package com.example.studentmanagementsystem.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.studentmanagementsystem.activity.AddStudentActivity;
 import com.example.studentmanagementsystem.communicator.Communication;
 import com.example.studentmanagementsystem.R;
 import com.example.studentmanagementsystem.backgroundTask.BackgroundAsyncTaskOperations;
@@ -37,6 +41,21 @@ public class AddStudentFragment extends Fragment {
     private Context mContext;
     private Communication mCommunication;
     private ArrayList<Student> mStudentList = new ArrayList<Student>();
+    private StudentBroadcastReceiver mStudentBroadcastReceiver = new StudentBroadcastReceiver();
+
+    //to register broadcast receiver
+    @Override
+    public void onStart() {
+        super.onStart();
+        IntentFilter intentFilter = new IntentFilter(Constant.ACTION);
+        LocalBroadcastManager.getInstance(mContext).registerReceiver(mStudentBroadcastReceiver,intentFilter);
+    }
+    //to unregister broadcast receiver
+    @Override
+    public void onStop() {
+        super.onStop();
+        LocalBroadcastManager.getInstance(mContext).unregisterReceiver(mStudentBroadcastReceiver);
+    }
 
     public AddStudentFragment() {
 
@@ -142,6 +161,7 @@ public class AddStudentFragment extends Fragment {
 
                 }
                 mCommunication.communicateAdd(sendBundle);
+
             }
         });
         mBuilder.setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -209,5 +229,12 @@ public class AddStudentFragment extends Fragment {
                 generateDialogBox(Constant.NORMAL,name,roll,bundle);
             }
         });
+    }
+    //Inner broadcast receiver that receives the broadcast if the services have indeed added the elements in the database.
+    public class StudentBroadcastReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Toast.makeText(context,intent.getStringExtra(getString(R.string.message)),Toast.LENGTH_LONG).show();
+        }
     }
 }
