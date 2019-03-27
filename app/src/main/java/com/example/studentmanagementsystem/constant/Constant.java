@@ -30,4 +30,6 @@ public final class Constant {
     public static final String DB_NAME = "student_db";
     public static final int DB_VERSION=1;
 
+    public static final String ACTION = "broadcast";
+
 }

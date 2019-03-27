@@ -24,7 +24,7 @@ public class BackgroundService extends Service {
             DatabaseHelper.updateStudent(intent.getStringExtra(Constant.NAME),intent.getStringExtra(Constant.ROLL_NO));
         }
         //setting up broadcast receiver
-        intent.setAction(getString(R.string.broadcast));
+        intent.setAction(Constant.ACTION);
         String echoMessage = getString(R.string.broadcast_message) ;
         LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent.putExtra(getString(R.string.message), echoMessage));
         stopSelf();

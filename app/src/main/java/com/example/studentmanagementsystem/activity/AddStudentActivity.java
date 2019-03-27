@@ -39,7 +39,7 @@ public class AddStudentActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        IntentFilter intentFilter = new IntentFilter(getString(R.string.broadcast));
+        IntentFilter intentFilter = new IntentFilter(Constant.ACTION);
         LocalBroadcastManager.getInstance(this).registerReceiver(mStudentBroadcastReceiver,intentFilter);
     }
     //to unregister broadcast receiver
