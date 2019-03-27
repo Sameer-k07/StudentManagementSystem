@@ -228,7 +228,7 @@ public class AddStudentActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             finish();
-            Toast.makeText(AddStudentActivity.this,getString(R.string.broadcast_received),Toast.LENGTH_LONG).show();
+            Toast.makeText(AddStudentActivity.this,intent.getStringExtra(getString(R.string.message)),Toast.LENGTH_LONG).show();
         }
     }
 
