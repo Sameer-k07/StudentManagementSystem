@@ -25,6 +25,10 @@
     <string name="your_choice_edit">You chose to Edit</string>
     <string name="your_choice_delete">You chose to Delete</string>
     <string name="student_list">mStudentList</string>
+    <string name="broadcast">broadcast</string>
+    <string name="broadcast_message">Broadcast Receiver</string>
+    <string name="message">broadcastMessage</string>
+    <string name="broadcast_received">Broadcast Received</string>
 
 
     <string-array name="Dialog_Operations">

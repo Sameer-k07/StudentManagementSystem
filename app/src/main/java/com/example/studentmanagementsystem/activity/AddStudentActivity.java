@@ -1,8 +1,13 @@
 package com.example.studentmanagementsystem.activity;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Vibrator;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,8 +33,22 @@ public class AddStudentActivity extends AppCompatActivity {
     private EditText mEtStudentName, mEtStudentRollNo;
     private DatabaseHelper db;
     private String[] mDialogItems={"ASYNC","SERVICE","INTENT SERVICE"};
+    private StudentBroadcastReceiver mStudentBroadcastReceiver = new StudentBroadcastReceiver();
 
+    //to register broadcast receiver
+    @Override
+    protected void onStart() {
+        super.onStart();
+        IntentFilter intentFilter = new IntentFilter(getString(R.string.broadcast));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mStudentBroadcastReceiver,intentFilter);
+    }
+    //to unregister broadcast receiver
+    @Override
+    protected void onStop() {
+        super.onStop();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mStudentBroadcastReceiver);
 
+    }
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -203,6 +222,14 @@ public class AddStudentActivity extends AppCompatActivity {
                 generateDialogBox(Constant.EDIT,name,roll);
             }
         });
+    }
+    //Inner broadcast receiver that receives the broadcast if the services have indeed added the elements in the database.
+    public class StudentBroadcastReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            finish();
+            Toast.makeText(AddStudentActivity.this,getString(R.string.broadcast_received),Toast.LENGTH_LONG).show();
+        }
     }
 
 }//end of AddStudentActivity class

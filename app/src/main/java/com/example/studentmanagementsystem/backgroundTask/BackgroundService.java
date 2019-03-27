@@ -3,7 +3,9 @@ package com.example.studentmanagementsystem.backgroundTask;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.support.v4.content.LocalBroadcastManager;
 
+import com.example.studentmanagementsystem.R;
 import com.example.studentmanagementsystem.constant.Constant;
 import com.example.studentmanagementsystem.database.DatabaseHelper;
 
@@ -21,6 +23,10 @@ public class BackgroundService extends Service {
         }else if(intent.getStringExtra(Constant.OPERATION).equals(Constant.EDIT)){
             DatabaseHelper.updateStudent(intent.getStringExtra(Constant.NAME),intent.getStringExtra(Constant.ROLL_NO));
         }
+        //setting up broadcast receiver
+        intent.setAction(getString(R.string.broadcast));
+        String echoMessage = getString(R.string.broadcast_message) ;
+        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent.putExtra(getString(R.string.message), echoMessage));
         stopSelf();
         return START_NOT_STICKY;
     }
