@@ -46,7 +46,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.MyViewHo
     //binds the data to the view and also uses old views
     @Override
     public void onBindViewHolder(@NonNull StudentAdapter.MyViewHolder myViewHolder, int i) {
-        Student student = mStudentList.get(i);
+        Student student = mStudentList.get(myViewHolder.getAdapterPosition());
         MyViewHolder viewHolder = myViewHolder;
         viewHolder.mName.setText(student.getmName());
         viewHolder.mRollNo.setText(student.getmRollNo());
