@@ -231,5 +231,4 @@ public class AddStudentActivity extends AppCompatActivity {
             Toast.makeText(AddStudentActivity.this,intent.getStringExtra(getString(R.string.message)),Toast.LENGTH_LONG).show();
         }
     }
-
 }//end of AddStudentActivity class
