@@ -25,8 +25,8 @@ public class BackgroundService extends Service {
         }
         //setting up broadcast receiver
         intent.setAction(Constant.ACTION);
-        String echoMessage = getString(R.string.message);
-        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent.putExtra(getString(R.string.message), echoMessage));
+        String echoMessage = Constant.MESSAGE;
+        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent.putExtra(Constant.MESSAGE, echoMessage));
         stopSelf();
         return START_NOT_STICKY;
     }

@@ -9,8 +9,8 @@ import com.example.studentmanagementsystem.model.Student;
 import java.util.ArrayList;
 
 public class BackgroundAsyncTaskGet extends AsyncTask<String, Void, ArrayList<Student>> {
-    Context ctx;
-    Callback callback;
+    private Context ctx;
+    private Callback callback;
 
     public BackgroundAsyncTaskGet(Context ctx, Callback callback) {
         this.ctx = ctx;

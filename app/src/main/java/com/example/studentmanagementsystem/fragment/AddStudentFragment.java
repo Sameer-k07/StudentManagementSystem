@@ -37,7 +37,7 @@ public class AddStudentFragment extends Fragment {
     private Button mSaveButton;
     private EditText mEtStudentName, mEtStudentRollNo;
     private DatabaseHelper db;
-    private String[] mDialogItems={"ASYNC","SERVICE","INTENT SERVICE"};
+    private String[] mDialogItems;
     private Context mContext;
     private BackgroundAsyncTaskOperations.SendData sendData;
     private Communication mCommunication;
@@ -97,6 +97,7 @@ public class AddStudentFragment extends Fragment {
         mSaveButton = view.findViewById(R.id.btn_save);
         mEtStudentName = view.findViewById(R.id.et_studentName);
         mEtStudentRollNo = view.findViewById(R.id.et_studentRoll);
+        mDialogItems = getResources().getStringArray(R.array.Background_Tasks);
     }
     /*
     *method to update details of student
@@ -235,7 +236,7 @@ public class AddStudentFragment extends Fragment {
     public class StudentBroadcastReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Toast.makeText(context,intent.getStringExtra(getString(R.string.message)),Toast.LENGTH_LONG).show();
+            Toast.makeText(context,intent.getStringExtra(Constant.MESSAGE),Toast.LENGTH_LONG).show();
         }
     }
 }

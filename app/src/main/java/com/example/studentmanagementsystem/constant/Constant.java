@@ -32,6 +32,7 @@ public final class Constant {
     public static final int ADD_STUDENT=1;
 
     public static final String ACTION = "action";
+    public static final String MESSAGE = "Broadcast Received";
 
 
 }
