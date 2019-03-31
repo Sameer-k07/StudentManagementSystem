@@ -8,10 +8,12 @@ import com.example.studentmanagementsystem.database.DatabaseHelper;
 
 public class BackgroundAsyncTaskOperations extends AsyncTask<String,Void,String> {
 
-    Context context;
+    private Context context;
+    private SendData sendData;
 
-    public BackgroundAsyncTaskOperations(Context context){
+    public BackgroundAsyncTaskOperations(Context context,SendData sendData){
         this.context=context;
+        this.sendData=sendData;
     }
     @Override
     protected void onPreExecute() {
@@ -44,6 +46,11 @@ public class BackgroundAsyncTaskOperations extends AsyncTask<String,Void,String>
     }
     @Override
     protected void onPostExecute(String result) {
+        sendData.callBack(result);
+    }
+    public interface SendData{
+        public void callBack(String str);
+
     }
 
 }

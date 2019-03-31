@@ -39,6 +39,7 @@ public class AddStudentFragment extends Fragment {
     private DatabaseHelper db;
     private String[] mDialogItems={"ASYNC","SERVICE","INTENT SERVICE"};
     private Context mContext;
+    private BackgroundAsyncTaskOperations.SendData sendData;
     private Communication mCommunication;
     private ArrayList<Student> mStudentList = new ArrayList<Student>();
     private StudentBroadcastReceiver mStudentBroadcastReceiver = new StudentBroadcastReceiver();
@@ -140,7 +141,7 @@ public class AddStudentFragment extends Fragment {
 
                 switch(i){
                     case Constant.ASYNC :
-                        (new BackgroundAsyncTaskOperations(mContext)).execute(operation,name,rollNo);
+                        (new BackgroundAsyncTaskOperations(mContext,sendData)).execute(operation,name,rollNo);
                         break;
                     case Constant.SERVICE :
                         Intent service=new Intent(mContext, BackgroundService.class);
