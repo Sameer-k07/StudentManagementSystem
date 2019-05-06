@@ -33,8 +33,8 @@ import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity  {
 
-    Button addButton;
-    RelativeLayout rlNoStudent;
+    private Button addButton;
+    private RelativeLayout rlNoStudent;
     private ArrayList<Student> mStudentList = new ArrayList<Student>();
     private RecyclerView mRecyclerView;
     private StudentAdapter mAdapter;
@@ -263,7 +263,7 @@ public class MainActivity extends AppCompatActivity  {
     *@param data - data passed through intent
     */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        rlNoStudent = findViewById(R.id.noStudent);
+        rlNoStudent = findViewById(R.id.noStudentView);
         //set no student added screen when count of students is zero
         if(mAdapter.getItemCount()==-1){
             rlNoStudent.setVisibility(View.VISIBLE);
