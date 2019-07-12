@@ -62,7 +62,7 @@ class MainActivityKotlin : AppCompatActivity() {
         })
     }
 
-    private fun recyclerViewOperations() {
+  /*  private fun recyclerViewOperations() {
         mRecyclerView!!.addOnItemTouchListener(TouchListener(this@MainActivityKotlin, mRecyclerView, object : TouchListener.ClickListener {
             override fun onClick(view: View?, position: Int) {
                 val student = mStudentList[position]
@@ -93,7 +93,46 @@ class MainActivityKotlin : AppCompatActivity() {
 
             }
         }))
+    }*/
+
+    private fun recyclerViewOperations(){
+        mRecyclerView!!.addOnItemTouchListener(TouchListener(this@MainActivityKotlin ,mRecyclerView,object : TouchListener.ClickListener{
+
+            override fun onClick(view: View?, position: Int) {
+                val student = mStudentList[position]
+                val mBuilder = AlertDialog.Builder(this@MainActivityKotlin)
+                mBuilder.setTitle("Choose your operation")
+                mBuilder.setSingleChoiceItems(mDialogItems,-1){
+                    dialog, which ->
+                    val intent = Intent(this@MainActivityKotlin,AddStudentActivityKotlin::class.java)
+                    when(which){
+                        VIEW -> viewDetails(intent,student)
+                        EDIT -> {
+                            setposition(position)
+                            editDetails(intent,student)
+                        }
+                        DELETE ->{
+                            setposition(position)
+                            deleteDetails()
+                        }
+                    }
+                    dialog!!.dismiss()
+                }
+                mBuilder.setNegativeButton("Cancel"){
+                    dialog, which ->
+                }
+                val mDialog =mBuilder.create()
+                mDialog.show()
+            }
+            override fun onLongClick(view: View?, position: Int) {
+
+            }
+        }))
     }
+
+
+
+
 
     private fun viewDetails(intent: Intent, student: StudentKotlin) {
         intent.putExtra(Constant.MODE, Constant.VIEW)

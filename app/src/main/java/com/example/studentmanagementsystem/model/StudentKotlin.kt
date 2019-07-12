@@ -1,9 +1,9 @@
 package com.example.studentmanagementsystem.model
 
-import android.os.Parcel
 import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
-class StudentKotlin : Parcelable {
+/*class StudentKotlin : Parcelable {
      var mName: String? = null
      var mRollNo: String? = null
 
@@ -33,12 +33,12 @@ class StudentKotlin : Parcelable {
         override fun newArray(size: Int): Array<StudentKotlin?> {
             return arrayOfNulls(size)
         }
-    }
+    }*/
 
-/*    @Parcelize
+    @Parcelize
     data class StudentKotlin(
             var mName: String? = null,
             var mRollNo: String? = null
-    ) : Parcelable*/
+    ) : Parcelable
 
-}
+
